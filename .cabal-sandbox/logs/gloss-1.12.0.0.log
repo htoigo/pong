@@ -1,0 +1,54 @@
+cabal: Entering directory '/tmp/cabal-tmp-19385/gloss-1.12.0.0'
+Configuring gloss-1.12.0.0...
+Building gloss-1.12.0.0...
+Preprocessing library gloss-1.12.0.0...
+[ 1 of 44] Compiling Graphics.Gloss.Internals.Interface.Simulate.State ( Graphics/Gloss/Internals/Interface/Simulate/State.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Simulate/State.o )
+[ 2 of 44] Compiling Graphics.Gloss.Internals.Interface.Debug ( Graphics/Gloss/Internals/Interface/Debug.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Debug.o )
+[ 3 of 44] Compiling Graphics.Gloss.Internals.Interface.Animate.State ( Graphics/Gloss/Internals/Interface/Animate/State.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Animate/State.o )
+[ 4 of 44] Compiling Graphics.Gloss.Geometry.Angle ( Graphics/Gloss/Geometry/Angle.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Geometry/Angle.o )
+[ 5 of 44] Compiling Graphics.Gloss.Data.Point.Arithmetic ( Graphics/Gloss/Data/Point/Arithmetic.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Point/Arithmetic.o )
+[ 6 of 44] Compiling Graphics.Gloss.Data.Picture ( Graphics/Gloss/Data/Picture.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Picture.o )
+[ 7 of 44] Compiling Graphics.Gloss.Data.Point ( Graphics/Gloss/Data/Point.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Point.o )
+[ 8 of 44] Compiling Graphics.Gloss.Data.Vector ( Graphics/Gloss/Data/Vector.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Vector.o )
+[ 9 of 44] Compiling Graphics.Gloss.Geometry.Line ( Graphics/Gloss/Geometry/Line.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Geometry/Line.o )
+[10 of 44] Compiling Graphics.Gloss.Data.ViewPort ( Graphics/Gloss/Data/ViewPort.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/ViewPort.o )
+[11 of 44] Compiling Graphics.Gloss.Data.Display ( Graphics/Gloss/Data/Display.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Display.o )
+[12 of 44] Compiling Graphics.Gloss.Internals.Interface.Backend.Types ( Graphics/Gloss/Internals/Interface/Backend/Types.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Backend/Types.o )
+[13 of 44] Compiling Graphics.Gloss.Internals.Interface.Backend.GLUT ( Graphics/Gloss/Internals/Interface/Backend/GLUT.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Backend/GLUT.o )
+[14 of 44] Compiling Graphics.Gloss.Interface.Environment ( Graphics/Gloss/Interface/Environment.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/Environment.o )
+[15 of 44] Compiling Graphics.Gloss.Internals.Interface.Backend ( Graphics/Gloss/Internals/Interface/Backend.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Backend.o )
+[16 of 44] Compiling Graphics.Gloss.Internals.Interface.Animate.Timing ( Graphics/Gloss/Internals/Interface/Animate/Timing.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Animate/Timing.o )
+[17 of 44] Compiling Graphics.Gloss.Internals.Interface.Event ( Graphics/Gloss/Internals/Interface/Event.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Event.o )
+[18 of 44] Compiling Graphics.Gloss.Data.ViewState ( Graphics/Gloss/Data/ViewState.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/ViewState.o )
+[19 of 44] Compiling Graphics.Gloss.Internals.Interface.ViewState.KeyMouse ( Graphics/Gloss/Internals/Interface/ViewState/KeyMouse.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/ViewState/KeyMouse.o )
+[20 of 44] Compiling Graphics.Gloss.Internals.Interface.Callback ( Graphics/Gloss/Internals/Interface/Callback.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Callback.o )
+[21 of 44] Compiling Graphics.Gloss.Internals.Interface.Simulate.Idle ( Graphics/Gloss/Internals/Interface/Simulate/Idle.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Simulate/Idle.o )
+[22 of 44] Compiling Graphics.Gloss.Internals.Interface.ViewState.Motion ( Graphics/Gloss/Internals/Interface/ViewState/Motion.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/ViewState/Motion.o )
+[23 of 44] Compiling Graphics.Gloss.Internals.Interface.ViewState.Reshape ( Graphics/Gloss/Internals/Interface/ViewState/Reshape.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/ViewState/Reshape.o )
+[24 of 44] Compiling Graphics.Gloss.Internals.Interface.Common.Exit ( Graphics/Gloss/Internals/Interface/Common/Exit.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Common/Exit.o )
+[25 of 44] Compiling Graphics.Gloss.Data.Controller ( Graphics/Gloss/Data/Controller.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Controller.o )
+[26 of 44] Compiling Graphics.Gloss.Data.Color ( Graphics/Gloss/Data/Color.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Color.o )
+[27 of 44] Compiling Graphics.Gloss.Internals.Color ( Graphics/Gloss/Internals/Color.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Color.o )
+[28 of 44] Compiling Graphics.Gloss.Internals.Interface.Window ( Graphics/Gloss/Internals/Interface/Window.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Window.o )
+[29 of 44] Compiling Graphics.Gloss.Internals.Interface.Animate ( Graphics/Gloss/Internals/Interface/Animate.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Animate.o )
+[30 of 44] Compiling Graphics.Gloss.Interface.IO.Animate ( Graphics/Gloss/Interface/IO/Animate.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/IO/Animate.o )
+[31 of 44] Compiling Graphics.Gloss.Interface.Pure.Animate ( Graphics/Gloss/Interface/Pure/Animate.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/Pure/Animate.o )
+[32 of 44] Compiling Graphics.Gloss.Internals.Interface.Display ( Graphics/Gloss/Internals/Interface/Display.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Display.o )
+[33 of 44] Compiling Graphics.Gloss.Interface.IO.Display ( Graphics/Gloss/Interface/IO/Display.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/IO/Display.o )
+[34 of 44] Compiling Graphics.Gloss.Interface.Pure.Display ( Graphics/Gloss/Interface/Pure/Display.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/Pure/Display.o )
+[35 of 44] Compiling Graphics.Gloss.Internals.Interface.Game ( Graphics/Gloss/Internals/Interface/Game.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Game.o )
+[36 of 44] Compiling Graphics.Gloss.Interface.IO.Game ( Graphics/Gloss/Interface/IO/Game.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/IO/Game.o )
+[37 of 44] Compiling Graphics.Gloss.Interface.Pure.Game ( Graphics/Gloss/Interface/Pure/Game.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/Pure/Game.o )
+[38 of 44] Compiling Graphics.Gloss.Internals.Interface.Interact ( Graphics/Gloss/Internals/Interface/Interact.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Interact.o )
+[39 of 44] Compiling Graphics.Gloss.Interface.IO.Interact ( Graphics/Gloss/Interface/IO/Interact.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/IO/Interact.o )
+[40 of 44] Compiling Graphics.Gloss.Internals.Interface.Simulate ( Graphics/Gloss/Internals/Interface/Simulate.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Interface/Simulate.o )
+[41 of 44] Compiling Graphics.Gloss.Interface.IO.Simulate ( Graphics/Gloss/Interface/IO/Simulate.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/IO/Simulate.o )
+[42 of 44] Compiling Graphics.Gloss.Interface.Pure.Simulate ( Graphics/Gloss/Interface/Pure/Simulate.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Interface/Pure/Simulate.o )
+[43 of 44] Compiling Graphics.Gloss.Data.Bitmap ( Graphics/Gloss/Data/Bitmap.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Data/Bitmap.o )
+[44 of 44] Compiling Graphics.Gloss   ( Graphics/Gloss.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss.o )
+Creating package registration file:
+/tmp/pkgConf-gloss-1.12.09398195822001100545.0
+Installing library in
+/home/harry/code/proj/pong/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.2/gloss-1.12.0.0-GiGeMl3bbxf8S4IjyhIPji
+Registering gloss-1.12.0.0...
+cabal: Leaving directory '/tmp/cabal-tmp-19385/gloss-1.12.0.0'

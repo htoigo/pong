@@ -1,0 +1,14 @@
+cabal: Entering directory '/tmp/cabal-tmp-24678/random-1.1'
+Configuring random-1.1...
+Building random-1.1...
+Preprocessing library random-1.1...
+[1 of 1] Compiling System.Random    ( System/Random.hs, dist/dist-sandbox-5c4d6549/build/System/Random.o )
+
+System/Random.hs:43:1: warning: [-Wtabs]
+    Tab character found here, and in 74 further locations.
+    Please use spaces instead.
+Creating package registration file: /tmp/pkgConf-random-15965166491189641421.1
+Installing library in
+/home/harry/code/proj/pong/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.2/random-1.1-9tceXaeYIMZ4JrKq20Egog
+Registering random-1.1...
+cabal: Leaving directory '/tmp/cabal-tmp-24678/random-1.1'

@@ -1,0 +1,19 @@
+cabal: Entering directory '/tmp/cabal-tmp-19385/gloss-rendering-1.12.0.0'
+Configuring gloss-rendering-1.12.0.0...
+Building gloss-rendering-1.12.0.0...
+Preprocessing library gloss-rendering-1.12.0.0...
+[1 of 9] Compiling Graphics.Gloss.Internals.Rendering.Bitmap ( Graphics/Gloss/Internals/Rendering/Bitmap.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Rendering/Bitmap.o )
+[2 of 9] Compiling Graphics.Gloss.Internals.Data.Color ( Graphics/Gloss/Internals/Data/Color.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Data/Color.o )
+[3 of 9] Compiling Graphics.Gloss.Internals.Data.Picture ( Graphics/Gloss/Internals/Data/Picture.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Data/Picture.o )
+[4 of 9] Compiling Graphics.Gloss.Internals.Rendering.State ( Graphics/Gloss/Internals/Rendering/State.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Rendering/State.o )
+[5 of 9] Compiling Graphics.Gloss.Internals.Rendering.Color ( Graphics/Gloss/Internals/Rendering/Color.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Rendering/Color.o )
+[6 of 9] Compiling Graphics.Gloss.Internals.Rendering.Common ( Graphics/Gloss/Internals/Rendering/Common.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Rendering/Common.o )
+[7 of 9] Compiling Graphics.Gloss.Internals.Rendering.Circle ( Graphics/Gloss/Internals/Rendering/Circle.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Rendering/Circle.o )
+[8 of 9] Compiling Graphics.Gloss.Internals.Rendering.Picture ( Graphics/Gloss/Internals/Rendering/Picture.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Internals/Rendering/Picture.o )
+[9 of 9] Compiling Graphics.Gloss.Rendering ( Graphics/Gloss/Rendering.hs, dist/dist-sandbox-5c4d6549/build/Graphics/Gloss/Rendering.o )
+Creating package registration file:
+/tmp/pkgConf-gloss-rendering-1.12.011006613131433925857.0
+Installing library in
+/home/harry/code/proj/pong/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.2/gloss-rendering-1.12.0.0-AqGnMrOrqpeCRNpI1Lhnj6
+Registering gloss-rendering-1.12.0.0...
+cabal: Leaving directory '/tmp/cabal-tmp-19385/gloss-rendering-1.12.0.0'
