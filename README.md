@@ -5,7 +5,7 @@ A simple pong game implemented in Haskell, using the Gloss library.
 ## Installation
 
 ...
-git clone https://github.com/htoigo/pong.git
+`git clone https://github.com/htoigo/pong.git`
 ...
 
 ## Usage
@@ -13,12 +13,15 @@ git clone https://github.com/htoigo/pong.git
 After installing on your computer, you can run pong by ...
 
 The intial game view.
+
 ![Game Start](screenshots/game-start.png "At Game Start")
 
 Paused in the middle of a game.
+
 ![Game Paused](screenshots/game-paused.png "Paused mid-game")
 
 Game over... :-(
+
 ![Game Over](screenshots/game-over.png "Game Over")
 
 ## Contributing
