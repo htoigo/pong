@@ -1,12 +1,12 @@
 # pong
 
-A simple pong game implemented in Haskell.
-
-## Table of Contents
+A simple pong game implemented in Haskell, using the Gloss library.
 
 ## Installation
 
+...
 git clone https://github.com/htoigo/pong.git
+...
 
 ## Usage
 
@@ -22,10 +22,12 @@ section, below.)
 
 ## Credits
 
-This little Haskell application grew out of my working through Andrew
-Gibiansky's excellent tutorial blog post [_Your First Haskell Application (with
-Gloss)_](http://andrew.gibiansky.com/blog/haskell/haskell-gloss). It really is a
-great resource for learning to build a Haskell application using Cabal. Thanks,
+This little Haskell game grew out of my working through the excellent tutorial
+blog post ["Your First Haskell Application (with
+Gloss)"](http://andrew.gibiansky.com/blog/haskell/haskell-gloss) by Andrew
+Gibiansky, used under [CC
+BY-SA](https://creativecommons.org/licenses/by-sa/4.0). It really is a great
+resource for learning to build a Haskell application using Cabal. Thanks,
 Andrew! For someone with some experience programming in Haskell, but who has
 never before built a Cabal application, the included code gives you a solid
 foundation from which to build, and the exercises, especially, are meaty with
@@ -34,5 +36,7 @@ out!
 
 ## License
 
-The code in this repository is licensed under the [CC BY-SA
-4.0](https://creativecommons.org/licenses/by-sa/4.0/) license.
+New code contributions are licensed under the [GNU General Public License
+version 3](https://www.gnu.org/copyleft/gpl.html). New content is licensed under
+[CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0). See the LICENSE file
+for details.
