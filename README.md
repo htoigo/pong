@@ -1,14 +1,15 @@
-# pong
+# Pong
 
 A simple pong game implemented in Haskell, using the Gloss library.
 
-## Installation
+
+### Installation
 
 ...
 `git clone https://github.com/htoigo/pong.git`
 ...
 
-## Usage
+### Usage
 
 After installing on your computer, you can run pong by ...
 
@@ -24,12 +25,12 @@ Game over... :-(
 
 ![Game Over](screenshots/game-over.png "Game Over")
 
-## Contributing
+### Contributing
 
 Rather than contributing here, please consider working through Andrew
 Gibiansky's excellent tutorial yourself. (See the Credits section, below.)
 
-## Credits
+### Credits
 
 This little Haskell game grew out of my working through the excellent tutorial
 blog post ["Your First Haskell Application (with
@@ -43,7 +44,7 @@ foundation from which to build, and the exercises, especially, are meaty with
 just the right level of challenge to get you thoroughly engrossed. Go check it
 out!
 
-## License
+### License
 
 New code contributions are licensed under the [GNU General Public License
 version 3](https://www.gnu.org/copyleft/gpl.html). New content is licensed under
