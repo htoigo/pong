@@ -12,8 +12,14 @@ git clone https://github.com/htoigo/pong.git
 
 After installing on your computer, you can run pong by ...
 
-Include screenshots here.
-![Initial Game Screen](/images/game-start.png)
+The intial game view.
+![Game Start](screenshots/game-start.png "At Game Start")
+
+Paused in the middle of a game.
+![Game Paused](screenshots/game-paused.png "Paused mid-game")
+
+Game over... :-(
+![Game Over](screenshots/game-over.png "Game Over")
 
 ## Contributing
 
