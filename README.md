@@ -26,8 +26,8 @@ Game over... :-(
 
 ## Contributing
 
-Please go work through Andrew's excellent tutorial yourself. (See the Credits
-section, below.)
+Rather than contributing here, please consider working through Andrew
+Gibiansky's excellent tutorial yourself. (See the Credits section, below.)
 
 ## Credits
 
