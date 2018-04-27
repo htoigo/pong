@@ -1,0 +1,38 @@
+cabal: Entering directory '/tmp/cabal-tmp-26841/bifunctors-5.5.2'
+Warning: bifunctors.cabal: Unknown fields: build-tool-depends (line 99)
+Fields allowed in this section:
+type, main-is, test-module, buildable, build-tools, build-depends,
+cpp-options, cc-options, ld-options, pkgconfig-depends, frameworks,
+extra-framework-dirs, c-sources, js-sources, default-language,
+other-languages, default-extensions, other-extensions, extensions,
+extra-libraries, extra-ghci-libraries, extra-lib-dirs, includes,
+install-includes, include-dirs, hs-source-dirs, other-modules,
+ghc-prof-options, ghcjs-prof-options, ghc-shared-options,
+ghcjs-shared-options, ghc-options, ghcjs-options, jhc-options,
+hugs-options, nhc98-options
+Configuring bifunctors-5.5.2...
+Building bifunctors-5.5.2...
+Preprocessing library bifunctors-5.5.2...
+[ 1 of 17] Compiling Paths_bifunctors ( dist/dist-sandbox-5c4d6549/build/autogen/Paths_bifunctors.hs, dist/dist-sandbox-5c4d6549/build/Paths_bifunctors.o )
+[ 2 of 17] Compiling Data.Bifunctor.Functor ( src/Data/Bifunctor/Functor.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Functor.o )
+[ 3 of 17] Compiling Data.Bifoldable  ( old-src/ghc801/Data/Bifoldable.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifoldable.o )
+[ 4 of 17] Compiling Data.Bitraversable ( old-src/ghc801/Data/Bitraversable.hs, dist/dist-sandbox-5c4d6549/build/Data/Bitraversable.o )
+[ 5 of 17] Compiling Data.Bifunctor.Sum ( src/Data/Bifunctor/Sum.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Sum.o )
+[ 6 of 17] Compiling Data.Bifunctor.TH.Internal ( src/Data/Bifunctor/TH/Internal.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/TH/Internal.o )
+[ 7 of 17] Compiling Data.Bifunctor.TH ( src/Data/Bifunctor/TH.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/TH.o )
+[ 8 of 17] Compiling Data.Biapplicative ( src/Data/Biapplicative.hs, dist/dist-sandbox-5c4d6549/build/Data/Biapplicative.o )
+[ 9 of 17] Compiling Data.Bifunctor.Biff ( src/Data/Bifunctor/Biff.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Biff.o )
+[10 of 17] Compiling Data.Bifunctor.Clown ( src/Data/Bifunctor/Clown.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Clown.o )
+[11 of 17] Compiling Data.Bifunctor.Fix ( src/Data/Bifunctor/Fix.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Fix.o )
+[12 of 17] Compiling Data.Bifunctor.Flip ( src/Data/Bifunctor/Flip.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Flip.o )
+[13 of 17] Compiling Data.Bifunctor.Join ( src/Data/Bifunctor/Join.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Join.o )
+[14 of 17] Compiling Data.Bifunctor.Joker ( src/Data/Bifunctor/Joker.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Joker.o )
+[15 of 17] Compiling Data.Bifunctor.Product ( src/Data/Bifunctor/Product.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Product.o )
+[16 of 17] Compiling Data.Bifunctor.Tannen ( src/Data/Bifunctor/Tannen.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Tannen.o )
+[17 of 17] Compiling Data.Bifunctor.Wrapped ( src/Data/Bifunctor/Wrapped.hs, dist/dist-sandbox-5c4d6549/build/Data/Bifunctor/Wrapped.o )
+Creating package registration file:
+/tmp/pkgConf-bifunctors-5.5133535434087755422.2
+Installing library in
+/home/harry/code/proj/pong/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.2/bifunctors-5.5.2-6VZYwqVVWMM8FGGCa9nrZR
+Registering bifunctors-5.5.2...
+cabal: Leaving directory '/tmp/cabal-tmp-26841/bifunctors-5.5.2'

@@ -1,0 +1,94 @@
+cabal: Entering directory '/tmp/cabal-tmp-26840/unordered-containers-0.2.9.0'
+Configuring unordered-containers-0.2.9.0...
+Building unordered-containers-0.2.9.0...
+Preprocessing library unordered-containers-0.2.9.0...
+[1 of 8] Compiling Data.HashMap.UnsafeShift ( Data/HashMap/UnsafeShift.hs, dist/dist-sandbox-5c4d6549/build/Data/HashMap/UnsafeShift.o )
+[2 of 8] Compiling Data.HashMap.Unsafe ( Data/HashMap/Unsafe.hs, dist/dist-sandbox-5c4d6549/build/Data/HashMap/Unsafe.o )
+[3 of 8] Compiling Data.HashMap.List ( Data/HashMap/List.hs, dist/dist-sandbox-5c4d6549/build/Data/HashMap/List.o )
+[4 of 8] Compiling Data.HashMap.Array ( Data/HashMap/Array.hs, dist/dist-sandbox-5c4d6549/build/Data/HashMap/Array.o )
+
+Data/HashMap/Array.hs:89:1-9: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      newArray# :: ghc-prim-0.5.0.0:GHC.Prim.Int#
+                   -> a
+                   -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                   -> (# ghc-prim-0.5.0.0:GHC.Prim.State# d, SmallMutableArray# d a #)
+
+Data/HashMap/Array.hs:90:1-10: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      readArray# :: SmallMutableArray# d a
+                    -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                    -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                    -> (# ghc-prim-0.5.0.0:GHC.Prim.State# d, a #)
+
+Data/HashMap/Array.hs:91:1-11: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      writeArray# :: SmallMutableArray# d a
+                     -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                     -> a
+                     -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                     -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+
+Data/HashMap/Array.hs:92:1-11: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      indexArray# :: SmallArray# a
+                     -> ghc-prim-0.5.0.0:GHC.Prim.Int# -> (# a #)
+
+Data/HashMap/Array.hs:93:1-18: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      unsafeFreezeArray# :: SmallMutableArray# d a
+                            -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                            -> (# ghc-prim-0.5.0.0:GHC.Prim.State# d, SmallArray# a #)
+
+Data/HashMap/Array.hs:94:1-16: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      unsafeThawArray# :: SmallArray# a
+                          -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                          -> (# ghc-prim-0.5.0.0:GHC.Prim.State# d, SmallMutableArray# d a #)
+
+Data/HashMap/Array.hs:95:1-12: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      sizeofArray# :: SmallArray# a -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+
+Data/HashMap/Array.hs:96:1-10: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      copyArray# :: SmallArray# a
+                    -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                    -> SmallMutableArray# d a
+                    -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                    -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                    -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                    -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+
+Data/HashMap/Array.hs:97:1-10: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      thawArray# :: SmallArray# a
+                    -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                    -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                    -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                    -> (# ghc-prim-0.5.0.0:GHC.Prim.State# d, SmallMutableArray# d a #)
+
+Data/HashMap/Array.hs:98:1-19: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      sizeofMutableArray# :: SmallMutableArray# d a
+                             -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+
+Data/HashMap/Array.hs:99:1-17: warning: [-Wmissing-signatures]
+    Top-level binding with no type signature:
+      copyMutableArray# :: SmallMutableArray# d a
+                           -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                           -> SmallMutableArray# d a
+                           -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                           -> ghc-prim-0.5.0.0:GHC.Prim.Int#
+                           -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+                           -> ghc-prim-0.5.0.0:GHC.Prim.State# d
+[5 of 8] Compiling Data.HashMap.Base ( Data/HashMap/Base.hs, dist/dist-sandbox-5c4d6549/build/Data/HashMap/Base.o )
+[6 of 8] Compiling Data.HashMap.Lazy ( Data/HashMap/Lazy.hs, dist/dist-sandbox-5c4d6549/build/Data/HashMap/Lazy.o )
+[7 of 8] Compiling Data.HashSet     ( Data/HashSet.hs, dist/dist-sandbox-5c4d6549/build/Data/HashSet.o )
+[8 of 8] Compiling Data.HashMap.Strict ( Data/HashMap/Strict.hs, dist/dist-sandbox-5c4d6549/build/Data/HashMap/Strict.o )
+Creating package registration file:
+/tmp/pkgConf-unordered-containers-0.2.96013856441172755590.0
+Installing library in
+/home/harry/code/proj/pong/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.2/unordered-containers-0.2.9.0-I73HC5EUas25tgk2pdMfNr
+Registering unordered-containers-0.2.9.0...
+cabal: Leaving directory '/tmp/cabal-tmp-26840/unordered-containers-0.2.9.0'

@@ -10,13 +10,14 @@ name:                pong
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.1.0.0
+version:             0.3.0.0
 
 -- A short (one-line) description of the package.
 synopsis:            A simple pong game.
 
 -- A longer description of the package.
--- description:         
+description:         A pong game in Haskell using the Gloss library along with
+                     SDL2 for sounds.
 
 -- The license under which the package is released.
 license:             BSD3
@@ -58,8 +59,10 @@ executable pong
   
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.9 && <4.10
-                     , gloss>=1.8
-                     , random>=1.1
+                     , gloss >=1.8
+                     , random >=1.1
+                     , sdl2 >=2.4
+                     , sdl2-mixer >=1.1
   
   -- Directories containing source files.
   -- hs-source-dirs:      

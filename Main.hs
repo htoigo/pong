@@ -1,9 +1,13 @@
-module Main(main, PongGame(..), render, initialState, moveBall) where
+--module Main(main, PongGame(..), renderIO, initialState, moveBall) where
+module Main(main) where
 
 import Graphics.Gloss
 import Graphics.Gloss.Data.ViewPort (ViewPort)
-import Graphics.Gloss.Interface.Pure.Game
+import Graphics.Gloss.Interface.IO.Game
 import System.Random
+
+import qualified SDL
+import qualified SDL.Mixer as Mix
 
 -- Global pong ball characteristics
 ballRadius, ballSpeed :: Float
@@ -42,6 +46,7 @@ data PongGame = Game
   , mode :: PlayMode           -- ^ Whether the game is in 1- or 2-player mode.
   , rndGen :: StdGen           -- ^ Random number generator used for initial
                                --   ball direction.
+  , sounds :: Sounds           -- ^ A record of all game sounds.
   } deriving Show
 
 -- | A data type indicating the play mode, either 1- or 2-player.
@@ -69,9 +74,18 @@ data PaddleState = Still
                  | GoingDown
                  deriving Show
 
+data Sounds = Sounds
+  { frPdlBounce :: Mix.Chunk     -- ^ Sound of ball hitting paddle front.
+  , sdPdlBounce :: Mix.Chunk     -- ^ Sound of ball hitting paddle top/bottom.
+  , topWallBounce :: Mix.Chunk  -- ^ Sound of ball hitting top wall.
+  , btmWallBounce :: Mix.Chunk  -- ^ Sound of ball hitting bottom wall.
+  , begin :: Mix.Chunk          -- ^ Sound when play begins.
+  , bkgndMusic :: Mix.Chunk     -- ^ Background music.
+  } deriving (Show, Eq)
+
 -- | The starting state for the game of Pong.
-initialState :: StdGen -> PongGame
-initialState rg = Game
+initialState :: StdGen -> Sounds -> PongGame
+initialState rg snds = Game
   { ballLoc     = (-20, 30)
   , ballVel     = (ballSpeed * cos dir, ballSpeed * sin dir)
   , playerL     = 0
@@ -84,6 +98,7 @@ initialState rg = Game
   , winner      = Neither
   , mode        = TwoPlayer
   , rndGen      = rg'
+  , sounds      = snds
   }
   where
     -- 'dir' is the initial direction of the ball, as an angle in radians
@@ -97,14 +112,15 @@ initialState rg = Game
     (d, rg') = randomR (0, 1) rg
 
 -- | Convert a game state into a picture.
-render :: PongGame    -- ^ The game state to render.
-       -> Picture     -- ^ A picture of this game state.
-render game =
-  pictures [ ball (stateOfPlay game), walls
-           , mkPaddle lBorderClr lPdlX (playerL game)
-           , mkPaddle rBorderClr rPdlX (playerR game)
-           , statusDisplay (stateOfPlay game) (winner game) (mode game)
-           ]
+renderIO :: PongGame    -- ^ The game state to render.
+         -> IO Picture  -- ^ A picture of this game state.
+renderIO game =
+  return $ pictures [ ball (stateOfPlay game)
+                    , walls
+                    , mkPaddle lBorderClr lPdlX (playerL game)
+                    , mkPaddle rBorderClr rPdlX (playerR game)
+                    , statusDisplay (stateOfPlay game) (winner game) (mode game)
+                    ]
   where
     -- The pong ball
     ball :: PlayState -> Picture
@@ -220,21 +236,21 @@ moveRightPdl secs game@Game{rPdlState=GoingDown}
 moveRightPdl _ game@Game{rPdlState=Still} = game      
 
 -- | Update the game by moving the ball, bouncing off walls and paddles,
--- and moving the paddles.
+-- moving the paddles, and playing sounds.
 -- Ignore the ViewPort argument.  The first Float parameter is the number of
 -- seconds since the last update.
-update :: Float -> PongGame -> PongGame
-update _ game@Game{stateOfPlay=NotBegun}   = game          -- Do nothing
-update _ game@Game{stateOfPlay=Ended}      = game          -- Do nothing
-update _ game@Game{stateOfPlay=Paused}     = game          -- Do nothing
-update secs game
+updateIO :: Float -> PongGame -> IO PongGame
+updateIO _ game@Game{stateOfPlay=NotBegun}   = return game   -- Do nothing
+updateIO _ game@Game{stateOfPlay=Ended}      = return game   -- Do nothing
+updateIO _ game@Game{stateOfPlay=Paused}     = return game   -- Do nothing
+updateIO secs game
   | ballX < -fromIntegral windowWidth / 2 - ballRadius
-        = game {stateOfPlay = Ended, winner = RightPlayer}
+        = return game {stateOfPlay = Ended, winner = RightPlayer}
   | ballX >  fromIntegral windowWidth / 2 + ballRadius
-        = game {stateOfPlay = Ended, winner = LeftPlayer}
+        = return game {stateOfPlay = Ended, winner = LeftPlayer}
   | otherwise
-        = paddleBounce $ wallBounce $ movePaddles secs $ aiResponds
-            $ moveBall secs game
+        = paddleBounce =<< wallBounce
+            (movePaddles secs $ aiResponds $ moveBall secs game)
   where
     ballX = fst (ballLoc game)
 
@@ -253,46 +269,55 @@ aiResponds game
 type Radius = Float
 type Position = (Float, Float)
 
--- | Given position and radius of the ball, return whether a collision occurred.
-wallCollision :: Position -> Radius -> Bool
-wallCollision (_,y) radius = topCollision || bottomCollision
-  where
-    topCollision    = y + radius >=  fromIntegral windowHeight/2 - wallThickness
-    bottomCollision = y - radius <= -fromIntegral windowHeight/2 + wallThickness
+-- | Indicates whether or not a collision with a wall has happened, and if so
+-- with which wall.
+data WallCollision = NoneW
+                   | TopWall
+                   | BtmWall
 
--- | Detect a collision with one of the side walls. Upon collisions,
--- update the velocity of the ball to bounce it off the wall.
-wallBounce :: PongGame -> PongGame
-wallBounce game = game { ballVel = (vx, vy') }
+-- | Detect a collision with one of the side walls. Given position and radius of
+-- the ball, return whether a collision occurred, and if so with which wall.
+wallCollision :: Position -> Radius -> WallCollision
+wallCollision (_,y) radius
+  | y + radius >=  fromIntegral windowHeight/2 - wallThickness = TopWall
+  | y - radius <= -fromIntegral windowHeight/2 + wallThickness = BtmWall
+  | otherwise                                                  = NoneW
+
+-- | Upon a wall collision, update the velocity of the ball to bounce it off the
+-- wall, and if necessary play the appropriate sound.
+wallBounce :: PongGame -> IO PongGame
+wallBounce game = case wallCollision (ballLoc game) ballRadius of
+                    NoneW   -> return game
+                    TopWall -> do
+                      Mix.play topWallSnd
+                      return game { ballVel = reflect oldVel }
+                    BtmWall -> do
+                      Mix.play btmWallSnd
+                      return game { ballVel = reflect oldVel }
   where
-    -- The old velocity
-    (vx, vy) = ballVel game
-    vy' = if wallCollision (ballLoc game) ballRadius
-          then
-            -- Update the velocity.
-            -vy
-          else
-            -- Do nothing. Return the old velocity.
-            vy
+    oldVel = ballVel game
+    topWallSnd = topWallBounce (sounds game)
+    btmWallSnd = btmWallBounce (sounds game)
+    reflect (vx,vy) = (vx, -vy)
 
 -- | We only need to differentiate between collisions with the front of a paddle
 -- or with a paddle's top/bottom.
-data Collision = None
-               | LFront
-               | RFront
-               | Top
-               | Bottom
+data PdlCollision = NoneP
+                  | LFront
+                  | RFront
+                  | TopP
+                  | BtmP
 
 -- | Detect a collision with a paddle.  Given position and radius of the ball,
 -- and y positions of the paddles, return whether a paddle collision occurred,
 -- and if so what type.
-paddleCollision :: Position -> Radius -> Float -> Float -> Collision
+paddleCollision :: Position -> Radius -> Float -> Float -> PdlCollision
 paddleCollision (x,y) r lPdlY rPdlY
   | lFrontCollision                = LFront
   | rFrontCollision                = RFront
-  | lTopCollision || rTopCollision = Top
-  | lBtmCollision || rBtmCollision = Bottom
-  | otherwise                      = None
+  | lTopCollision || rTopCollision = TopP
+  | lBtmCollision || rBtmCollision = BtmP
+  | otherwise                      = NoneP
   where
     lFrontCollision = y >= lPdlBtm && y <= lPdlTop
                       && x - r <= lPdlRight && x - r > lPdlRight - 20
@@ -316,32 +341,42 @@ paddleCollision (x,y) r lPdlY rPdlY
     rPdlRight       = rPdlX + paddleWidth / 2
 
 -- | Upon collisions, change the velocity of the ball to bounce it off the
--- paddle.
-paddleBounce :: PongGame -> PongGame
-paddleBounce game = game { ballVel = (vx', vy') }
+-- paddle, and if necessary play the appropriate sound.
+paddleBounce :: PongGame -> IO PongGame
+paddleBounce game = case paddleCollision (ballLoc game) ballRadius
+                                         (playerL game) (playerR game) of
+                      NoneP  -> return game
+                      LFront -> do
+                        Mix.play frPdlSnd
+                        return game { ballVel = reflectR oldVel lPdlSt }
+                      RFront -> do
+                        Mix.play frPdlSnd
+                        return game { ballVel = reflectL oldVel rPdlSt }
+                      TopP   -> do
+                        Mix.play sdPdlSnd
+                        return game { ballVel = reflectU oldVel }
+                      BtmP   -> do
+                        Mix.play sdPdlSnd
+                        return game { ballVel = reflectD oldVel }
   where
-    (vx, vy)    = ballVel game    -- The old velocity
-    (vx', vy')  = case paddleCollision (ballLoc game) ballRadius
-                                      (playerL game) (playerR game) of
-                   None   -> (vx, vy)
-                   LFront -> case lPdlState game of
-                               Still     -> (reflectRU vx, vy)
-                               GoingUp   -> (reflectRU vx + 0.03*lpV,
-                                              vy + 0.3*lpV)
-                               GoingDown -> (reflectRU vx + 0.03*lpV,
-                                              vy - 0.3*lpV)
-                   RFront -> case rPdlState game of
-                               Still     -> (reflectLD vx, vy)
-                               GoingUp   -> (reflectLD vx + 0.03*rpV,
-                                              vy + 0.3*rpV)
-                               GoingDown -> (reflectLD vx + 0.03*rpV,
-                                              vy - 0.3*rpV)
-                   Top    -> (vx, reflectRU vy)
-                   Bottom -> (vx, reflectLD vy)
-    reflectRU v = if v < 0 then -v else v
-    reflectLD v = if v > 0 then -v else v
-    rpV         = rPdlVel game
-    lpV         = lPdlVel game
+    oldVel   = ballVel game
+    lPdlSt   = lPdlState game
+    rPdlSt   = rPdlState game
+    rpV      = rPdlVel game
+    lpV      = lPdlVel game
+    frPdlSnd = frPdlBounce (sounds game)
+    sdPdlSnd = sdPdlBounce (sounds game)
+    reflectR :: (Float, Float) -> PaddleState -> (Float, Float)
+    reflectR (vx,vy) pdlSt = case pdlSt of
+                               Still -> (abs vx, vy)
+                               GoingUp -> (abs vx + 0.03*lpV, vy + 0.3*lpV)
+                               GoingDown -> (abs vx + 0.03*lpV, vy - 0.3*lpV)
+    reflectL (vx,vy) pdlSt = case pdlSt of
+                               Still -> (-abs vx, vy)
+                               GoingUp -> (-abs vx - 0.03*rpV, vy + 0.3*rpV)
+                               GoingDown -> (-abs vx - 0.03*rpV, vy - 0.3*rpV)
+    reflectU (vx,vy)       = (vx,  abs vy)
+    reflectD (vx,vy)       = (vx, -abs vy)
 
 -- | Respond to key events.
 --
@@ -353,39 +388,43 @@ paddleBounce game = game { ballVel = (vx', vy') }
 --   's'   moves the left paddle down.
 --   UP    moves the right paddle up.
 --   DWN   moves the right paddle down.
-handleKeys :: Event -> PongGame -> PongGame
-handleKeys (EventKey (Char '1') Down _ _) game@Game{stateOfPlay=NotBegun}
-  = game {stateOfPlay = InPlay, mode = OnePlayer}
-handleKeys (EventKey (Char '2') Down _ _) game@Game{stateOfPlay=NotBegun}
-  = game {stateOfPlay = InPlay}
-handleKeys (EventKey (SpecialKey KeySpace) Down _ _) game@Game{stateOfPlay=InPlay}
-  = game {stateOfPlay = Paused}
-handleKeys (EventKey (SpecialKey KeySpace) Down _ _) game@Game{stateOfPlay=Paused}
-  = game {stateOfPlay = InPlay}
+handleKeysIO :: Event -> PongGame -> IO PongGame
+handleKeysIO (EventKey (Char '1') Down _ _) game@Game{stateOfPlay=NotBegun}
+  = do
+    Mix.play $ begin (sounds game)
+    return game {stateOfPlay = InPlay, mode = OnePlayer}
+handleKeysIO (EventKey (Char '2') Down _ _) game@Game{stateOfPlay=NotBegun}
+  = do
+    Mix.play $ begin (sounds game)
+    return game {stateOfPlay = InPlay}
+handleKeysIO (EventKey (SpecialKey KeySpace) Down _ _) game@Game{stateOfPlay=InPlay}
+  = return game {stateOfPlay = Paused}
+handleKeysIO (EventKey (SpecialKey KeySpace) Down _ _) game@Game{stateOfPlay=Paused}
+  = return game {stateOfPlay = InPlay}
 -- If the game is paused, don't respond to keypresses other than SPC.
-handleKeys _ game@Game{stateOfPlay=Paused} = game
+handleKeysIO _ game@Game{stateOfPlay=Paused} = return game
 -- After the game has ended, allow the game to be reset.
-handleKeys (EventKey (Char 'r') Down _ _) game@Game{stateOfPlay=Ended}
-  = initialState (rndGen game)
+handleKeysIO (EventKey (Char 'r') Down _ _) game@Game{stateOfPlay=Ended}
+  = return $ initialState (rndGen game) (sounds game)
 -- Controlling the paddles
-handleKeys (EventKey (Char 'w') Down _ _) game@Game{mode=TwoPlayer}
-  = game { lPdlState = GoingUp }
-handleKeys (EventKey (Char 'w') Up _ _) game@Game{mode=TwoPlayer}
-  = game { lPdlState = Still, lPdlVel = pdlMinSpeed }
-handleKeys (EventKey (Char 's') Down _ _) game@Game{mode=TwoPlayer}
-  = game { lPdlState = GoingDown }
-handleKeys (EventKey (Char 's') Up _ _) game@Game{mode=TwoPlayer}
-  = game { lPdlState = Still, lPdlVel = pdlMinSpeed }
-handleKeys (EventKey (SpecialKey KeyUp) Down _ _) game
-  = game { rPdlState = GoingUp }
-handleKeys (EventKey (SpecialKey KeyUp) Up _ _) game
-  = game { rPdlState = Still, rPdlVel = pdlMinSpeed }
-handleKeys (EventKey (SpecialKey KeyDown) Down _ _) game
-  = game { rPdlState = GoingDown }
-handleKeys (EventKey (SpecialKey KeyDown) Up _ _) game
-  = game { rPdlState = Still, rPdlVel = pdlMinSpeed }
+handleKeysIO (EventKey (Char 'w') Down _ _) game@Game{mode=TwoPlayer}
+  = return game { lPdlState = GoingUp }
+handleKeysIO (EventKey (Char 'w') Up _ _) game@Game{mode=TwoPlayer}
+  = return game { lPdlState = Still, lPdlVel = pdlMinSpeed }
+handleKeysIO (EventKey (Char 's') Down _ _) game@Game{mode=TwoPlayer}
+  = return game { lPdlState = GoingDown }
+handleKeysIO (EventKey (Char 's') Up _ _) game@Game{mode=TwoPlayer}
+  = return game { lPdlState = Still, lPdlVel = pdlMinSpeed }
+handleKeysIO (EventKey (SpecialKey KeyUp) Down _ _) game
+  = return game { rPdlState = GoingUp }
+handleKeysIO (EventKey (SpecialKey KeyUp) Up _ _) game
+  = return game { rPdlState = Still, rPdlVel = pdlMinSpeed }
+handleKeysIO (EventKey (SpecialKey KeyDown) Down _ _) game
+  = return game { rPdlState = GoingDown }
+handleKeysIO (EventKey (SpecialKey KeyDown) Up _ _) game
+  = return game { rPdlState = Still, rPdlVel = pdlMinSpeed }
 -- Do nothing for all other events.
-handleKeys _ game = game
+handleKeysIO _ game = return game
 
 screenWidth, screenHeight :: Int
 windowWidth, windowHeight, windowPosX, windowPosY :: Int
@@ -406,7 +445,26 @@ background = black
 fps :: Int
 fps = 60
 
+-- | Load all the game sounds from files into a Sounds record.
+loadSounds :: IO Sounds
+loadSounds = do
+  pdlFr <- Mix.load "audio/paddle-bounce-front.wav"
+  pdlSd <- Mix.load "audio/paddle-bounce-side.wav"
+  topWall <- Mix.load "audio/wall-bounce-top.wav"
+  btmWall <- Mix.load "audio/wall-bounce-bottom.wav"
+  begin <- Mix.load "audio/begin-play.wav"
+  music <- Mix.load "audio/background-music.ogg"
+  return $ Sounds pdlFr pdlSd topWall btmWall begin music
+
 main :: IO ()
 main = do
-  rg <- newStdGen
-  play window background fps (initialState rg) render handleKeys update
+  rg <- newStdGen                 -- Get a random number generator
+  SDL.initialize [SDL.InitAudio]  -- Setup audio via SDL
+
+  let chunkSz = 256
+    in Mix.withAudio Mix.defaultAudio chunkSz $ do
+    snds <- loadSounds
+    playIO window background fps (initialState rg snds)
+           renderIO handleKeysIO updateIO
+
+  SDL.quit

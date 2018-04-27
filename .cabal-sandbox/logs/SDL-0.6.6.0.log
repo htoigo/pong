@@ -1,0 +1,13 @@
+cabal: Entering directory '/tmp/cabal-tmp-24779/SDL-0.6.6.0'
+[1 of 1] Compiling Main             ( /tmp/cabal-tmp-24779/SDL-0.6.6.0/dist/dist-sandbox-5c4d6549/setup/setup.hs, /tmp/cabal-tmp-24779/SDL-0.6.6.0/dist/dist-sandbox-5c4d6549/setup/Main.o )
+Linking /tmp/cabal-tmp-24779/SDL-0.6.6.0/dist/dist-sandbox-5c4d6549/setup/setup ...
+Configuring SDL-0.6.6.0...
+configure: WARNING: unrecognized options: --with-compiler
+configure: loading site script /usr/share/site/x86_64-unknown-linux-gnu
+checking for sdl-config... no
+checking for sdl11-config... no
+configure: error: *** SDL not found! Get SDL from www.libsdl.org.
+If you already installed it, check it's in the path. If problem remains,
+please send a mail to the address that appears in ./configure --version
+indicating your platform, the version of configure script and the problem.
+cabal: Leaving directory '/tmp/cabal-tmp-24779/SDL-0.6.6.0'
