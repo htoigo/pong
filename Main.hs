@@ -245,9 +245,13 @@ updateIO _ game@Game{stateOfPlay=Ended}      = return game   -- Do nothing
 updateIO _ game@Game{stateOfPlay=Paused}     = return game   -- Do nothing
 updateIO secs game
   | ballX < -fromIntegral windowWidth / 2 - ballRadius
-        = return game {stateOfPlay = Ended, winner = RightPlayer}
+        = do
+          Mix.halt Mix.AllChannels
+          return game {stateOfPlay = Ended, winner = RightPlayer}
   | ballX >  fromIntegral windowWidth / 2 + ballRadius
-        = return game {stateOfPlay = Ended, winner = LeftPlayer}
+        = do
+          Mix.halt Mix.AllChannels
+          return game {stateOfPlay = Ended, winner = LeftPlayer}
   | otherwise
         = paddleBounce =<< wallBounce
             (movePaddles secs $ aiResponds $ moveBall secs game)
@@ -392,15 +396,21 @@ handleKeysIO :: Event -> PongGame -> IO PongGame
 handleKeysIO (EventKey (Char '1') Down _ _) game@Game{stateOfPlay=NotBegun}
   = do
     Mix.play $ begin (sounds game)
+    Mix.play $ bkgndMusic (sounds game)
     return game {stateOfPlay = InPlay, mode = OnePlayer}
 handleKeysIO (EventKey (Char '2') Down _ _) game@Game{stateOfPlay=NotBegun}
   = do
     Mix.play $ begin (sounds game)
+    Mix.play $ bkgndMusic (sounds game)
     return game {stateOfPlay = InPlay}
 handleKeysIO (EventKey (SpecialKey KeySpace) Down _ _) game@Game{stateOfPlay=InPlay}
-  = return game {stateOfPlay = Paused}
+  = do
+    Mix.pause Mix.AllChannels
+    return game {stateOfPlay = Paused}
 handleKeysIO (EventKey (SpecialKey KeySpace) Down _ _) game@Game{stateOfPlay=Paused}
-  = return game {stateOfPlay = InPlay}
+  = do
+    Mix.resume Mix.AllChannels
+    return game {stateOfPlay = InPlay}
 -- If the game is paused, don't respond to keypresses other than SPC.
 handleKeysIO _ game@Game{stateOfPlay=Paused} = return game
 -- After the game has ended, allow the game to be reset.
