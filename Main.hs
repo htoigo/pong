@@ -463,8 +463,8 @@ main = do
 
   let chunkSz = 256
     in Mix.withAudio Mix.defaultAudio chunkSz $ do
-    snds <- loadSounds
-    playIO window background fps (initialState rg snds)
-           renderIO handleKeysIO updateIO
+         snds <- loadSounds
+         playIO window background fps (initialState rg snds)
+                renderIO handleKeysIO updateIO
 
   SDL.quit
