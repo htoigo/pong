@@ -75,12 +75,14 @@ data PaddleState = Still
                  deriving Show
 
 data Sounds = Sounds
-  { frPdlBounce :: Mix.Chunk     -- ^ Sound of ball hitting paddle front.
-  , sdPdlBounce :: Mix.Chunk     -- ^ Sound of ball hitting paddle top/bottom.
+  { frPdlBounce :: Mix.Chunk    -- ^ Sound of ball hitting paddle front.
+  , sdPdlBounce :: Mix.Chunk    -- ^ Sound of ball hitting paddle top/bottom.
   , topWallBounce :: Mix.Chunk  -- ^ Sound of ball hitting top wall.
   , btmWallBounce :: Mix.Chunk  -- ^ Sound of ball hitting bottom wall.
   , begin :: Mix.Chunk          -- ^ Sound when play begins.
   , bkgndMusic :: Mix.Chunk     -- ^ Background music.
+  , defeat :: Mix.Chunk         -- ^ Game over (defeat) sound.
+  , victory :: Mix.Chunk        -- ^ Game over (victory) sound.
   } deriving (Show, Eq)
 
 -- | The starting state for the game of Pong.
@@ -247,16 +249,23 @@ updateIO secs game
   | ballX < -fromIntegral windowWidth / 2 - ballRadius
         = do
           Mix.halt Mix.AllChannels
+          Mix.play victorySnd
           return game {stateOfPlay = Ended, winner = RightPlayer}
   | ballX >  fromIntegral windowWidth / 2 + ballRadius
         = do
           Mix.halt Mix.AllChannels
+          Mix.play gameOverSnd
           return game {stateOfPlay = Ended, winner = LeftPlayer}
   | otherwise
         = paddleBounce =<< wallBounce
             (movePaddles secs $ aiResponds $ moveBall secs game)
   where
-    ballX = fst (ballLoc game)
+    ballX       = fst (ballLoc game)
+    victorySnd  = victory (sounds game)
+    defeatSnd   = defeat (sounds game)
+    gameOverSnd = case (mode game) of
+                    OnePlayer -> defeatSnd
+                    TwoPlayer -> victorySnd
 
 aiResponds :: PongGame -> PongGame
 -- In 2-player mode, AI does nothing.
@@ -415,7 +424,9 @@ handleKeysIO (EventKey (SpecialKey KeySpace) Down _ _) game@Game{stateOfPlay=Pau
 handleKeysIO _ game@Game{stateOfPlay=Paused} = return game
 -- After the game has ended, allow the game to be reset.
 handleKeysIO (EventKey (Char 'r') Down _ _) game@Game{stateOfPlay=Ended}
-  = return $ initialState (rndGen game) (sounds game)
+  = do
+    Mix.halt Mix.AllChannels
+    return $ initialState (rndGen game) (sounds game)
 -- Controlling the paddles
 handleKeysIO (EventKey (Char 'w') Down _ _) game@Game{mode=TwoPlayer}
   = return game { lPdlState = GoingUp }
@@ -462,9 +473,11 @@ loadSounds = do
   pdlSd <- Mix.load "audio/paddle-bounce-side.wav"
   topWall <- Mix.load "audio/wall-bounce-top.wav"
   btmWall <- Mix.load "audio/wall-bounce-bottom.wav"
-  begin <- Mix.load "audio/begin-play.wav"
+  begin <- Mix.load "audio/begin-play.ogg"
   music <- Mix.load "audio/background-music.ogg"
-  return $ Sounds pdlFr pdlSd topWall btmWall begin music
+  defeat <- Mix.load "audio/defeat.wav"
+  victory <- Mix.load "audio/victory.ogg"
+  return $ Sounds pdlFr pdlSd topWall btmWall begin music defeat victory
 
 main :: IO ()
 main = do
