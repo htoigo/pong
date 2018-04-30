@@ -53,7 +53,7 @@ data PongGame = Game
 -- | A data type indicating the play mode, either 1- or 2-player.
 data PlayMode = OnePlayer
               | TwoPlayer
-              deriving Show
+              deriving (Show, Eq)
 
 -- | A data type to denote one of the players, or Neither if no player has won.
 data Player = Neither
