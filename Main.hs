@@ -1,11 +1,12 @@
 --module Main(main, PongGame(..), renderIO, initialState, moveBall) where
 module Main(main) where
 
+import System.Exit     (exitSuccess)
+import System.Random
+
 import Graphics.Gloss
 import Graphics.Gloss.Data.ViewPort (ViewPort)
 import Graphics.Gloss.Interface.IO.Game
-import System.Random
-
 import qualified SDL
 import qualified SDL.Mixer as Mix
 
@@ -393,15 +394,17 @@ paddleBounce game = case paddleCollision (ballLoc game) ballRadius
 
 -- | Respond to key events.
 --
---   '2'   begins a 2-player game.
---   '1'   begins a 1-player (AI) game.
---   SPC   pauses/unpauses the game.
---   'r'   resets the game after it has ended.
---   'w'   moves the left paddle up.
---   's'   moves the left paddle down.
---   UP    moves the right paddle up.
---   DWN   moves the right paddle down.
+--   '2'        begins a 2-player game.
+--   '1'        begins a 1-player (AI) game.
+--   SPC        pauses/unpauses the game.
+--   'r'        resets the game after it has ended.
+--   'w'        moves the left paddle up.
+--   's'        moves the left paddle down.
+--   UP         moves the right paddle up.
+--   DWN        moves the right paddle down.
+--   ESC        aborts the game, closing the window.
 handleKeysIO :: Event -> PongGame -> IO PongGame
+handleKeysIO (EventKey (SpecialKey KeyEsc) Down _ _) _ = exitSuccess
 handleKeysIO (EventKey (Char '1') Down _ _) game@Game{stateOfPlay=NotBegun}
   = do
     Mix.play $ begin (sounds game)
