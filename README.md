@@ -13,17 +13,25 @@ A simple pong game implemented in Haskell, using the Gloss library.
 
 After installing on your computer, you can run pong by ...
 
+A sample game.
+
+![Sample Game](images/pong.mng "Sample Game")
+
+Another sample game.
+
+![Sample Game 2](images/pong.gif "Sample Game 2")
+
 The intial game view.
 
-![Game Start](screenshots/game-start.png "At Game Start")
+![Game Start](images/game-start.png "At Game Start")
 
 Paused in the middle of a game.
 
-![Game Paused](screenshots/game-paused.png "Paused mid-game")
+![Game Paused](images/game-paused.png "Paused mid-game")
 
 Game over... :-(
 
-![Game Over](screenshots/game-over.png "Game Over")
+![Game Over](images/game-over.png "Game Over")
 
 ### Contributing
 
