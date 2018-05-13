@@ -15,11 +15,7 @@ After installing on your computer, you can run pong by ...
 
 A sample game.
 
-![Sample Game](images/pong.mng "Sample Game")
-
-Another sample game.
-
-![Sample Game 2](images/pong.gif "Sample Game 2")
+![Sample Game](images/pong.gif "Sample Game")
 
 The intial game view.
 
