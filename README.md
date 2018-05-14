@@ -8,9 +8,9 @@ sounds and music.
 ### Building Pong
 
 Pong was built using the command-line tool `cabal`, also known as cabal-install.
-If you do not already have this installed, find out how to do so at [Haskell
-Home Page](https://www.haskell.org/downloads), under the section titled "Minimal
-installers".
+If you do not already have this installed, find out how to do so at
+[Haskell.org](https://www.haskell.org/downloads), under the section titled
+*Minimal installers*.
 
 For example, on openSUSE, this was as easy as:
 
@@ -18,12 +18,16 @@ For example, on openSUSE, this was as easy as:
     cabal update
 
 Once you have the GHC compiler and `cabal` installed on your system, you can
-build Pong. I **highly** recommend using a Cabal sandbox for building Pong.
-After you have cloned the repo with `git clone
-https://github.com/htoigo/pong.git`, move into the newly-created Pong directory
-with `cd pong`--then create a new sandbox, install the required dependencies
-into it (which will be isolated from any system-wide Haskell install), and build
-Pong:
+build Pong.
+
+I **highly** recommend using a Cabal sandbox for building Pong.
+After you have cloned the repo with
+
+    git clone https://github.com/htoigo/pong.git
+
+move into the newly-created pong directory with `cd pong`. Now create a new
+sandbox, install the required dependencies into it (which will be isolated from
+any system-wide Haskell installation), and build Pong:
 
     cabal sandbox init
     cabal install --only-dependencies
@@ -48,8 +52,9 @@ keys. Other keys used are:
 
 ### Contributing
 
-Rather than contributing here, please consider working through Andrew
-Gibiansky's excellent tutorial yourself. (See the Credits section, below.)
+Rather than contributing here, I think you should work through Andrew
+Gibiansky's excellent tutorial yourself, which was how this project started for
+me. (See the *Credits* section, below.)
 
 ### Credits
 
