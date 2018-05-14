@@ -21,7 +21,7 @@ Once you have the GHC compiler and `cabal` installed on your system, you can
 build Pong.
 
 I **highly** recommend using a Cabal sandbox for building this project.
-After you have cloned the repo with
+After you have cloned the repo with:
 
     git clone https://github.com/htoigo/pong.git
 
