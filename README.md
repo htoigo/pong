@@ -20,7 +20,7 @@ For example, on openSUSE, this was as easy as:
 Once you have the GHC compiler and `cabal` installed on your system, you can
 build Pong.
 
-I **highly** recommend using a Cabal sandbox for building Pong.
+I **highly** recommend using a Cabal sandbox for building this project.
 After you have cloned the repo with
 
     git clone https://github.com/htoigo/pong.git
@@ -44,17 +44,23 @@ Start a game of Pong by invoking:
 from the Pong directory. Press '1' to begin a single player game, and press '2'
 to begin a 2-player game. The left-hand player uses the 'w' and 's' keys to move
 her paddle up and down, while the right-hand player uses the up and down arrow
-keys. Other keys used are:
+keys. The full list of keys used is:
 
-    'SPACE' pause/unpause the game
-    'ESC'   abort the game, closing the window
-    'r'     reset the game after it has ended
+    '1'      begin a single-player game
+    '2'      begin a 2-player game
+    'w'      move left paddle up
+    's'      "              " down
+    UP       move right paddle up
+    DOWN     "               " down
+    SPACE    pause/unpause the game
+    ESC      abort the game, closing the window
+    'r'      reset the game after it has ended
 
 ### Contributing
 
 Rather than contributing here, I think you should work through Andrew
-Gibiansky's excellent tutorial yourself, which was how this project started for
-me. (See the *Credits* section, below.)
+Gibiansky's excellent tutorial for yourself, which was how this project started
+for me. (See the *Credits* section, below.)
 
 ### Credits
 
