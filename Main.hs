@@ -1,12 +1,16 @@
---module Main(main, PongGame(..), renderIO, initialState, moveBall) where
 module Main(main) where
 
-import System.Exit     (exitSuccess)
-import System.Random
+import System.Exit     ( exitSuccess )
+import System.Random   ( StdGen, randomR, newStdGen )
 
-import Graphics.Gloss
-import Graphics.Gloss.Data.ViewPort (ViewPort)
-import Graphics.Gloss.Interface.IO.Game
+import Graphics.Gloss                    ( Display(..), Picture, pictures, blank
+                                         , Color, color, mixColors, dark, light
+                                         , red, blue, rose, orange
+                                         , black, white, greyN
+                                         , circleSolid, rectangleSolid, text
+                                         , translate, scale )
+import Graphics.Gloss.Interface.IO.Game  ( playIO, Event(..), Key(..)
+                                         , SpecialKey(..), KeyState(..) )
 import qualified SDL
 import qualified SDL.Mixer as Mix
 
