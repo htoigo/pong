@@ -24,3 +24,7 @@ cabal.sandbox.config
 .stack-work/
 cabal.project.local
 .HTF/
+
+# The images/ directory contains some very large (~1.7GB) video files, used
+# to create the animated gif displayed in the README of the github repo.
+images/*.avi
